@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+
+@import 'utility-patterns.css';
+@import 'range-slider.css';
+@import 'toggle-switch.css';
+@import 'theme.css';
+
+@tailwind utilities;
+
+@layer utilities {
+    .rtl {
+        direction: rtl;
+    }
+}
