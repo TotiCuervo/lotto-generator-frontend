@@ -53,6 +53,7 @@ export function LotteryProvider({ children }: IContextProps) {
                 : 1
             : 0
 
+    console.log(window.location.host)
     const alternative = current === 0 ? 1 : 0
 
     const contextValue = {
