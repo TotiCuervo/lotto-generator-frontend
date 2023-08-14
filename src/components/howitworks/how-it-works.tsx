@@ -18,7 +18,6 @@ export default function HowItWorks() {
                         </p>
                     </div>
 
-                    {/* Section content */}
                     <div className="grid-cols-12 md:gap-6">
                         {/* Content */}
                         <div
