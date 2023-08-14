@@ -12,7 +12,8 @@ export default function Footer() {
                             Multi-State Lottery Association (MUSL) or any State
                             lottery. Neither MUSL nor any state lottery
                             organization has approved or endorsed the content
-                            and activities of this website.
+                            and activities of this website.{' '}
+                            {window.location.host} or {window.location.hostname}
                         </p>
                     )}
                 </div>
