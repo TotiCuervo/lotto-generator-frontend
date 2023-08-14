@@ -129,4 +129,9 @@ module.exports = {
         },
     },
     plugins: [require('@tailwindcss/forms')],
+    safelist: [
+        {
+            pattern: /(bg|from|to)-(red|yellow)-(400|500|600)/,
+        },
+    ],
 }
