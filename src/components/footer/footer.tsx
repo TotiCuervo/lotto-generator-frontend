@@ -7,7 +7,7 @@ export default function Footer() {
             <div className="container mx-auto px-6 py-8">
                 <div className="flex flex-col items-center text-center">
                     <p className="mx-auto mt-4 max-w-xl text-gray-500 dark:text-gray-400">
-                        {process.env.NEXT_PUBLIC_API_URL} is not associated with
+                        {process.env.NEXT_PUBLIC_DOMAIN} is not associated with
                         the Multi-State Lottery Association (MUSL) or any State
                         lottery. Neither MUSL nor any state lottery organization
                         has approved or endorsed the content and activities of
