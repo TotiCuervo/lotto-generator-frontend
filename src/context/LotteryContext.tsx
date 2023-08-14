@@ -43,9 +43,21 @@ export function LotteryProvider({ children }: IContextProps) {
         },
     ]
 
+    const powerballUrl = 'powerballgenerator'
+    const megaMillionsUrl = 'megamillionsgenerator'
+
+    const current =
+        typeof window !== 'undefined'
+            ? window.location.host === powerballUrl
+                ? 0
+                : 1
+            : 0
+
+    const alternative = current === 0 ? 1 : 0
+
     const contextValue = {
-        currentType: info[1],
-        alternativeType: info[0],
+        currentType: info[current],
+        alternativeType: info[alternative],
     }
 
     return (
