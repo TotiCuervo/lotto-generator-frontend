@@ -6,16 +6,13 @@ export default function Footer() {
         <footer className="bg-white dark:bg-gray-900">
             <div className="container mx-auto px-6 py-8">
                 <div className="flex flex-col items-center text-center">
-                    {typeof window !== 'undefined' && (
-                        <p className="mx-auto mt-4 max-w-xl text-gray-500 dark:text-gray-400">
-                            {window.location.origin} is not associated with the
-                            Multi-State Lottery Association (MUSL) or any State
-                            lottery. Neither MUSL nor any state lottery
-                            organization has approved or endorsed the content
-                            and activities of this website.{' '}
-                            {window.location.host} or {window.location.hostname}
-                        </p>
-                    )}
+                    <p className="mx-auto mt-4 max-w-xl text-gray-500 dark:text-gray-400">
+                        {process.env.NEXT_PUBLIC_API_URL} is not associated with
+                        the Multi-State Lottery Association (MUSL) or any State
+                        lottery. Neither MUSL nor any state lottery organization
+                        has approved or endorsed the content and activities of
+                        this website.
+                    </p>
                 </div>
 
                 <hr className="my-10 border-gray-200 dark:border-gray-700" />

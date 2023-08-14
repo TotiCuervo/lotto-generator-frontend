@@ -43,17 +43,11 @@ export function LotteryProvider({ children }: IContextProps) {
         },
     ]
 
-    const powerballUrl = 'powerballgenerator'
-    const megaMillionsUrl = 'megamillionsgenerator'
+    const powerballUrl = 'powerballgenerator.com'
+    const megaMillionsUrl = 'megamillionsgenerator.com'
 
-    const current =
-        typeof window !== 'undefined'
-            ? window.location.host === powerballUrl
-                ? 0
-                : 1
-            : 0
+    const current = process.env.NEXT_PUBLIC_API_URL === powerballUrl ? 0 : 1
 
-    console.log(window.location.host)
     const alternative = current === 0 ? 1 : 0
 
     const contextValue = {
