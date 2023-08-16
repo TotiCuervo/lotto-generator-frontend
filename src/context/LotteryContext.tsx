@@ -14,6 +14,7 @@ interface TypeInfo {
     activeColor: string
     fromColor: string
     textColor: string
+    website: string
 }
 
 export interface LotteryContextType {
@@ -26,6 +27,9 @@ export const LotteryContext = React.createContext<LotteryContextType>(
 )
 
 export function LotteryProvider({ children }: IContextProps) {
+    const powerballUrl = 'powerballgenerator.com'
+    const megaMillionsUrl = 'megamillionsgenerator.com'
+
     const info: TypeInfo[] = [
         {
             name: 'Powerball',
@@ -33,6 +37,7 @@ export function LotteryProvider({ children }: IContextProps) {
             activeColor: 'red-600',
             fromColor: 'red-400',
             textColor: 'text-white',
+            website: powerballUrl,
         },
         {
             name: 'Mega Millions',
@@ -40,11 +45,9 @@ export function LotteryProvider({ children }: IContextProps) {
             activeColor: 'yellow-600',
             fromColor: 'yellow-400',
             textColor: 'text-black',
+            website: megaMillionsUrl,
         },
     ]
-
-    const powerballUrl = 'powerballgenerator.com'
-    const megaMillionsUrl = 'megamillionsgenerator.com'
 
     const current = process.env.NEXT_PUBLIC_DOMAIN === powerballUrl ? 0 : 1
 

@@ -14,7 +14,6 @@ export default function Hero() {
             >
                 {/* Hero content */}
                 <div className="pt-32 md:pt-80 ">
-                    {/* Section header */}
                     <div className="pb-12 text-center md:pb-16">
                         <h1
                             className="mb-4 text-5xl font-extrabold leading-tighter tracking-tighter md:text-6xl"

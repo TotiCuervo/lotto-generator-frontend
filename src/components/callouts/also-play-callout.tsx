@@ -3,6 +3,7 @@ import React from 'react'
 
 export default function AlsoPlayCallout() {
     const { alternativeType } = useLotteryContext()
+
     return (
         <div className="bg-gray-900 p-6">
             <div className="mx-auto grid max-w-6xl grid-cols-1 content-center text-center md:grid-cols-2">
@@ -17,7 +18,8 @@ export default function AlsoPlayCallout() {
                 <div className="mx-auto flex">
                     <div className="h-fit self-center">
                         <a
-                            href="/mega-million"
+                            href={`https://${alternativeType.website}`}
+                            target="_blank"
                             className={`btn mt-8 rounded-full bg-${alternativeType.baseColor} text-lg font-semibold ${alternativeType.textColor} hover:bg-${alternativeType.activeColor}  md:mt-0`}
                         >
                             <span>{alternativeType.name} Number Generator</span>
