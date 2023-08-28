@@ -1,8 +1,8 @@
 import { MongoClient } from 'mongodb'
 
-const uri = process.env.NEXT_MONGO_URI
+const uri = process.env.MONGODB_URI
 
-if (!process.env.NEXT_MONGO_URI) {
+if (!uri) {
     throw new Error('Add Mongo URI to .env.local')
 }
 
