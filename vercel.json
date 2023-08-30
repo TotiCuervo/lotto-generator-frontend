@@ -2,11 +2,7 @@
     "crons": [
         {
             "path": "/api/cron/pullLatestMegamillions",
-            "schedule": "0 5 * * *"
-        },
-        {
-            "path": "/api/cron/pullLatestPowerball",
-            "schedule": "0 5 * * *"
+            "schedule": "0 6 * * *"
         }
     ]
 }
