@@ -1,11 +1,11 @@
 {
     "crons": [
         {
-            "path": "/api/cron/pullLatestPowerball",
+            "path": "/api/cron/pullLatestMegamillions",
             "schedule": "0 5 * * *"
         },
         {
-            "path": "/api/cron/pullLatestMegamillions",
+            "path": "/api/cron/pullLatestPowerball",
             "schedule": "0 5 * * *"
         }
     ]
