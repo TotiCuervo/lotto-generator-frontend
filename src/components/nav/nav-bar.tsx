@@ -32,12 +32,12 @@ export default function Header() {
                     <nav className="hidden md:flex">
                         <ul className="flex grow flex-wrap items-center justify-start">
                             <li>
-                                <Link
-                                    href="/signin"
+                                <a
+                                    href={`https://www.${alternativeType.website.toLowerCase()}`}
                                     className={`btn-sm ml-3 rounded-full bg-${alternativeType.baseColor} font-semibold ${alternativeType.textColor} hover:bg-${alternativeType.activeColor}`}
                                 >
                                     {alternativeType.name} Number Generator
-                                </Link>
+                                </a>
                             </li>
                         </ul>
                     </nav>
