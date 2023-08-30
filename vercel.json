@@ -1,10 +1,6 @@
 {
     "crons": [
         {
-            "path": "/api/cron/pullLatestMegamillions",
-            "schedule": "0 6 * * *"
-        },
-        {
             "path": "/api/cron/hello-world",
             "schedule": "0 6 * * *"
         }
