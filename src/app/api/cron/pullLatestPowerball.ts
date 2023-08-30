@@ -30,6 +30,7 @@ async function getPowerballData() {
 }
 
 export default async function pullLatestPowerball() {
+    console.log('pullLatestPowerball')
     const currentWinningNumbers: IWinningNumbers[] = await getWinningNumbers()
     const data = await getPowerballData()
 
