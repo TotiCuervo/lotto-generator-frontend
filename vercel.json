@@ -1,7 +1,7 @@
 {
     "crons": [
         {
-            "path": "/api/cron/hello-world",
+            "path": "/api/cron/pullLatest",
             "schedule": "0 6 * * *"
         }
     ]
