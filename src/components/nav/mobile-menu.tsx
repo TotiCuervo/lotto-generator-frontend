@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { Transition } from '@headlessui/react'
 import Link from 'next/link'
+import LoginListItem from './login-list-item'
 
 export default function MobileMenu() {
     const [mobileNavOpen, setMobileNavOpen] = useState<boolean>(false)
@@ -105,6 +106,7 @@ export default function MobileMenu() {
                                     />
                                 </svg>
                             </Link>
+                            <LoginListItem />
                         </li>
                     </ul>
                 </Transition>

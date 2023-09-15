@@ -1,52 +1,93 @@
-'use client'
+import { Fragment } from 'react'
+import { Menu, Transition } from '@headlessui/react'
 
-import { useState } from 'react'
-import { Transition } from '@headlessui/react'
-
-type DropdownProps = {
-    children: React.ReactNode
-    title: string
+function classNames(...classes: string[]) {
+    return classes.filter(Boolean).join(' ')
 }
 
-export default function Dropdown({ children, title }: DropdownProps) {
-    const [dropdownOpen, setDropdownOpen] = useState<boolean>(false)
+export interface MenuItem {
+    name: string
+    type: 'link' | 'button' | 'info'
+    action?: () => void
+}
+
+export type GroupedMenuItems = MenuItem[]
+
+interface IProps {
+    children: React.ReactNode
+    menuItems: GroupedMenuItems[]
+}
+
+export default function Dropdown({ children, menuItems }: IProps) {
+    function renderMenuItem(item: MenuItem, active: boolean) {
+        if (item.type === 'link') {
+            return (
+                <a
+                    href="/buy-credit"
+                    className={classNames(
+                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-500',
+                        'block px-4 py-2 text-sm font-medium'
+                    )}
+                >
+                    {item.name}
+                </a>
+            )
+        }
+
+        if (item.type === 'info') {
+            return (
+                <div
+                    className={classNames(
+                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-500',
+                        'block px-4 py-2 text-sm font-medium'
+                    )}
+                >
+                    {item.name}
+                </div>
+            )
+        }
+
+        if (item.type === 'button') {
+            return (
+                <div
+                    className="block cursor-pointer px-4 py-2 text-sm font-medium hover:bg-slate-200 focus:bg-slate-200"
+                    onClick={item.action!}
+                >
+                    {item.name}
+                </div>
+            )
+        }
+    }
 
     return (
-        <li
-            className="relative"
-            onMouseEnter={() => setDropdownOpen(true)}
-            onMouseLeave={() => setDropdownOpen(false)}
-            onFocus={() => setDropdownOpen(true)}
-            onBlur={() => setDropdownOpen(false)}
-        >
-            <a
-                className="flex items-center px-3 py-2 text-gray-600 transition duration-150 ease-in-out hover:text-gray-900 lg:px-5"
-                href="#0"
-                aria-expanded={dropdownOpen}
-                onClick={(e) => e.preventDefault()}
-            >
-                {title}
-                <svg
-                    className="ml-1 h-3 w-3 shrink-0 cursor-pointer fill-current text-gray-500"
-                    viewBox="0 0 12 12"
-                    xmlns="http://www.w3.org/2000/svg"
-                >
-                    <path d="M10.28 4.305L5.989 8.598 1.695 4.305A1 1 0 00.28 5.72l5 5a1 1 0 001.414 0l5-5a1 1 0 10-1.414-1.414z" />
-                </svg>
-            </a>
+        <Menu as="div" className="relative inline-block text-left">
+            <div>
+                <Menu.Button>{children}</Menu.Button>
+            </div>
+
             <Transition
-                show={dropdownOpen}
-                as="ul"
-                className="absolute right-0 top-full ml-4 w-40 origin-top-right rounded bg-white py-2 shadow-lg"
-                enter="transition ease-out duration-200 transform"
-                enterFrom="opacity-0 -translate-y-2"
-                enterTo="opacity-100 translate-y-0"
-                leave="transition ease-out duration-200"
-                leaveFrom="opacity-100"
-                leaveTo="opacity-0"
+                as={Fragment}
+                enter="transition ease-out duration-100"
+                enterFrom="transform opacity-0 scale-95"
+                enterTo="transform opacity-100 scale-100"
+                leave="transition ease-in duration-75"
+                leaveFrom="transform opacity-100 scale-100"
+                leaveTo="transform opacity-0 scale-95"
             >
-                {children}
+                <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    {menuItems.map((group, index) => (
+                        <div className="py-1">
+                            {group.map((item) => (
+                                <Menu.Item>
+                                    {({ active }) => (
+                                        <>{renderMenuItem(item, active)}</>
+                                    )}
+                                </Menu.Item>
+                            ))}
+                        </div>
+                    ))}
+                </Menu.Items>
             </Transition>
-        </li>
+        </Menu>
     )
 }
