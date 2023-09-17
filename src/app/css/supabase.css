@@ -1,9 +1,7 @@
 /* Grid */
 
-.container {
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
+.supabase-container {
+    @apply ml-auto mr-auto w-11/12;
 }
 .row {
     position: relative;
