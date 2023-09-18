@@ -1,9 +1,8 @@
 'use client'
 
-import { useState, useEffect } from 'react'
 
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import MobileMenu from './mobile-menu'
 import { useLotteryContext } from '@/context/LotteryContext'
 import LoginListItem from './login-list-item'
 
@@ -43,22 +42,16 @@ export default function Header() {
                         </ul>
                     </nav>
                     <nav className="flex grow">
-                        <ul className="flex grow flex-wrap items-center justify-end">
-                            <li>
-                                <Link
-                                    href="/signup"
-                                    className="btn-sm mr-3 bg-red-600 text-gray-200 hover:bg-red-800"
-                                >
-                                    <span>Play Lottery</span>
-                                </Link>
-                            </li>
-                            <li>
-                                <LoginListItem />
-                            </li>
-                        </ul>
+                        <div className="grid grow auto-cols-max grid-flow-col flex-wrap items-center justify-end gap-4">
+                            <Link
+                                href="/signup"
+                                className="btn-sm mr-3 bg-red-600 text-gray-200 hover:bg-red-800"
+                            >
+                                <span>Play Lottery</span>
+                            </Link>
+                            <LoginListItem />
+                        </div>
                     </nav>
-
-                    {/* <MobileMenu /> */}
                 </div>
             </div>
         </header>
