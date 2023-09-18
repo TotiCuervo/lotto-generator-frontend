@@ -1,5 +1,6 @@
 'use client'
 
+
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useLotteryContext } from '@/context/LotteryContext'
@@ -40,12 +41,6 @@ export default function Header() {
                             </li>
                         </ul>
                     </nav>
-                    {/* <Link
-                                    href="/signup"
-                                    className="btn-sm mr-3 bg-red-600 text-gray-200 hover:bg-red-800"
-                                >
-                                    <span>Play Lottery</span>
-                                </Link> */}
                     <nav className="flex grow">
                         <div className="grid grow auto-cols-max grid-flow-col flex-wrap items-center justify-end gap-4">
                             <Link
