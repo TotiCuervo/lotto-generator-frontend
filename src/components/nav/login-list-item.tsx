@@ -16,8 +16,9 @@ export default function LoginListItem() {
         ],
         [
             {
-                type: 'info',
+                type: 'link',
                 name: 'Buy Credits',
+                href: '/pricing',
             },
         ],
         [
@@ -31,33 +32,43 @@ export default function LoginListItem() {
         ],
     ]
 
-    console.log('session boopy', session)
-
     if (session?.user) {
-        if (profile?.avatar_url) {
-            return (
-                <Dropdown menuItems={menuItems}>
-                    <img
-                        className="h-10 w-10 rounded-full"
-                        src={profile.avatar_url}
-                        alt="Rounded avatar"
-                    />
-                </Dropdown>
-            )
-        }
-
         return (
-            <Dropdown menuItems={menuItems}>
-                <div
-                    className={`h-10 w-10 rounded-full bg-${currentType.baseColor} flex items-center justify-center`}
+            <>
+                <Link
+                    href="/pricing"
+                    className="hidden space-x-2 border-r-2 border-gray-500 pr-4 transition hover:text-blue-400 sm:flex"
                 >
-                    <p
-                        className={`text-center text-xl ${currentType.textColor} font-bold`}
-                    >
-                        {session.user.email!.charAt(0).toUpperCase()}
-                    </p>
-                </div>
-            </Dropdown>
+                    <div>Pricing</div>
+                </Link>
+                <Link
+                    href="/pricing"
+                    className="hidden space-x-2 border-r-2 border-gray-500 pr-4 transition hover:text-blue-400 sm:flex"
+                >
+                    <div>{`${profile?.credits} Credits`}</div>
+                </Link>
+                {profile?.avatar_url ? (
+                    <Dropdown menuItems={menuItems}>
+                        <img
+                            className="h-10 w-10 rounded-full"
+                            src={profile.avatar_url}
+                            alt="Rounded avatar"
+                        />
+                    </Dropdown>
+                ) : (
+                    <Dropdown menuItems={menuItems}>
+                        <div
+                            className={`h-10 w-10 rounded-full bg-${currentType.baseColor} flex items-center justify-center`}
+                        >
+                            <p
+                                className={`text-center text-xl ${currentType.textColor} font-bold`}
+                            >
+                                {session.user.email!.charAt(0).toUpperCase()}
+                            </p>
+                        </div>
+                    </Dropdown>
+                )}
+            </>
         )
     }
 

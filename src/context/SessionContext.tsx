@@ -54,7 +54,7 @@ export function SessionProvider({ children }: IContextProps) {
 
             let { data, error, status } = await supabase
                 .from('profiles')
-                .select(`full_name, username, website, avatar_url`)
+                .select(`full_name, username, credits, avatar_url`)
                 .eq('id', session!.user?.id)
                 .single()
 

@@ -1,12 +1,10 @@
 import Script from 'next/script'
-import Head from 'next/head'
+import CreditsRemaining from '@/components/callouts/credits-remaining'
+import StripePricingTable from '@/components/stripe/stripe-pricing-table'
 
 export default function Pricing() {
     return (
         <div className="mx-auto flex min-h-screen max-w-7xl flex-col items-center justify-center overflow-visible py-2">
-            <Head>
-                <title>Buy RoomGPT Credits</title>
-            </Head>
             <Script src="https://js.stripe.com/v3/pricing-table.js" />
 
             <main className="mb-8 mt-12 flex w-full flex-col items-center justify-center px-4 text-center sm:mb-0">
@@ -18,26 +16,17 @@ export default function Pricing() {
                     </div>
                 </div>
                 <p className="mx-auto mb-10 mt-6 max-w-2xl text-center text-lg leading-8 text-gray-500">
-                    You currently have{' '}
-                    <span className="font-semibold text-gray-400">
-                        {/* {data?.remainingGenerations}{" "}
-            {data?.remainingGenerations > 1 ? "credits" : "credit"} */}
-                        TODO
-                    </span>
-                    . Purchase more below.
+                    You currently have <CreditsRemaining />. Purchase more
+                    below.
                 </p>
             </main>
             <div className="w-full">
-                <span>ADD Auth</span>
-                {true && (
-                    // @ts-ignore
-                    <stripe-pricing-table
-                        pricing-table-id="prctbl_1NqTPkL9HzCsPrNWKo4YduVZ"
-                        publishable-key="pk_test_51Nq6IbL9HzCsPrNWHwWs0hry1oBBBRfjvIga8PB1xyETA4hd15EoZiZPNBgp0uCTJ8oo02aDdsYWriV5pszYj6rh00xp1GDOkq"
-                    />
-                )}
+                <StripePricingTable
+                    pricingTableId={process.env.NEXT_STRIPE_PRICING_TABLE!}
+                    publishableKey={process.env.NEXT_STRIPE_PUBLISHING_KEY!}
+                />
             </div>
-            <div className="mt-10 text-center">
+            {/* <div className="mt-10 text-center">
                 <h4 className="mt-2 flex-none text-2xl font-bold leading-6 tracking-tight sm:text-5xl">
                     What’s included
                 </h4>
@@ -139,8 +128,8 @@ export default function Pricing() {
                     </svg>
                     Early access to new features
                 </li>
-            </ul>
-            <p className="mb-5 text-gray-800">
+            </ul> */}
+            <p className="mb-5 mt-20 text-gray-800">
                 Have an issue or question? Email{' '}
                 <span className="text-red-600">PB.MM.Generator@gmail.com</span>
             </p>
