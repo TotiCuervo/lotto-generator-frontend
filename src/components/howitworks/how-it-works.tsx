@@ -1,8 +1,12 @@
-import { useLotteryContext } from '@/context/LotteryContext'
+import useLotteryColorSchema from '@/hooks/useLotteryColorSchema'
+import { LotteryType } from '@/types/LotteryType'
 
-export default function HowItWorks() {
-    const { currentType } = useLotteryContext()
+interface IProps {
+    type: LotteryType
+}
 
+export default function HowItWorks({ type }: IProps) {
+    const { schema } = useLotteryColorSchema(type)
     return (
         <section className="relative bg-gray-100 pb-20">
             <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
@@ -10,11 +14,11 @@ export default function HowItWorks() {
                     <div className="mx-auto max-w-3xl pb-12 text-center md:pb-16">
                         <h1 className="h2 mb-4">How it works</h1>
                         <p className="text-xl text-gray-600">
-                            Welcome to the {currentType.name} Number Generator,
-                            where you can customize your own set of random
-                            numbers for the upcoming draws. This generator will
-                            help you generate multiple sets of numbers until you
-                            find the combination that suits you best.
+                            Welcome to the {schema.name} Number Generator, where
+                            you can customize your own set of random numbers for
+                            the upcoming draws. This generator will help you
+                            generate multiple sets of numbers until you find the
+                            combination that suits you best.
                         </p>
                     </div>
 

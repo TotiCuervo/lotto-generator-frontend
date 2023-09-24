@@ -131,7 +131,12 @@ module.exports = {
     plugins: [require('@tailwindcss/forms')],
     safelist: [
         {
-            pattern: /(bg|from|to)-(red|yellow)-(400|500|600)/,
+            pattern: /(bg|border|text|from|to)-(red|yellow)-(400|500|600)/,
+            variants: ['hover', 'focus'],
         },
+        'text-white',
+        'hover:text-white',
+        'text-black',
+        'hover:text-black',
     ],
 }
