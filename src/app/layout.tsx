@@ -3,8 +3,10 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import Footer from '@/components/footer/footer'
 import NavBar from '@/components/nav/nav-bar'
-import { LotteryProvider } from '@/context/LotteryContext'
 import { SessionProvider } from '@/context/SessionContext'
+import { AOSInit } from './_components/aos-init'
+import ShoppingCart from './_components/shopping-cart/shopping-cart'
+import { CartProvider } from '@/context/CartContext'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -20,15 +22,17 @@ export default async function RootLayout({
 }) {
     return (
         <html lang="en">
+            <AOSInit />
             <body className={inter.className}>
                 <SessionProvider>
-                    <LotteryProvider>
+                    <CartProvider>
                         <div className="flex min-h-screen flex-col">
+                            <ShoppingCart />
                             <NavBar />
                             <div className="flex-grow">{children}</div>
                             <Footer />
                         </div>
-                    </LotteryProvider>
+                    </CartProvider>
                 </SessionProvider>
             </body>
         </html>

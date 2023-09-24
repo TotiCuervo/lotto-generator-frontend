@@ -1,12 +1,6 @@
-import AlsoPlayCallout from './callouts/also-play-callout'
-import { LotteryType } from '@/types/LotteryType'
-import LotterySection from '@/app/(lottery)/_components/lottery-section'
+import LotterySection from './_components/lottery-section'
 
-interface IProps {
-    type: LotteryType
-}
-
-export default function Hero({ type }: IProps) {
+export default function Hero() {
     return (
         <section className="relative flex flex-col sm:min-h-screen">
             <div
@@ -19,7 +13,7 @@ export default function Hero({ type }: IProps) {
                             data-aos="zoom-y-out"
                             data-aos-delay="150"
                         >
-                            {type} Number Generator
+                            Lottery Number Generator
                         </h1>
                         <div className="mx-auto max-w-3xl">
                             <p
@@ -30,12 +24,11 @@ export default function Hero({ type }: IProps) {
                                 Create your own line of random numbers to use in
                                 upcoming draws.
                             </p>
-                            <LotterySection type={type} />
+                            <LotterySection />
                         </div>
                     </div>
                 </div>
             </div>
-            <AlsoPlayCallout type={type} />
         </section>
     )
 }

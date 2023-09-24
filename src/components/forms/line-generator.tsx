@@ -1,23 +1,29 @@
+'use client'
+
 import { useDrawContext } from '@/context/DrawContext'
-import { useLotteryContext } from '@/context/LotteryContext'
+import useLotteryColorSchema from '@/hooks/useLotteryColorSchema'
+import { LotteryType } from '@/types/LotteryType'
 import React, { useState } from 'react'
 
-export default function LineGenerator() {
-    const { generateDraws } = useDrawContext()
-    const { currentType } = useLotteryContext()
+interface IProp {
+    type: LotteryType
+}
 
+export default function LineGenerator({ type }: IProp) {
+    const { generateDraws } = useDrawContext()
+    const { schema } = useLotteryColorSchema(type)
     const [numberOfLines, setNumberOfLines] = useState(5)
     const [generating, setGenerating] = useState(false)
 
     const minusStyle =
         numberOfLines === 1
             ? 'bg-slate-200 text-black'
-            : `bg-${currentType.baseColor} ${currentType.textColor} hover:bg-${currentType.activeColor} hover:text-gray-100`
+            : `bg-${schema.baseColor} ${schema.textColor} hover:bg-${schema.activeColor} hover:text-gray-100`
 
     const plusStyle =
         numberOfLines === 10
             ? 'bg-slate-200 text-black'
-            : `bg-${currentType.baseColor} ${currentType.textColor} hover:bg-${currentType.activeColor} hover:text-gray-100`
+            : `bg-${schema.baseColor} ${schema.textColor} hover:bg-${schema.activeColor} hover:text-gray-100`
 
     async function buttonClick() {
         if (generating) return
@@ -40,9 +46,9 @@ export default function LineGenerator() {
     }
 
     return (
-        <div className="flex flex-col overflow-hidden rounded-xl border border-gray-300 p-2 sm:flex-row sm:rounded-full">
+        <div className="flex w-fit flex-col overflow-hidden rounded-xl border border-gray-300 p-2 sm:flex-row sm:rounded-full">
             <button
-                className={`hidden h-10 w-10 items-center justify-center self-center sm:flex ${minusStyle} rounded-full font-semibold uppercase`}
+                className={`hidden h-10 w-10 items-center justify-center self-center transition duration-300 ease-in-out sm:flex ${minusStyle} rounded-full font-semibold uppercase`}
                 onClick={minusOne}
             >
                 −
@@ -56,7 +62,7 @@ export default function LineGenerator() {
                 onChange={(e) => setNumberOfLines(parseInt(e.target.value))}
             />
             <button
-                className={`hidden h-10 w-10 items-center justify-center self-center sm:flex ${plusStyle} rounded-full font-semibold uppercase`}
+                className={`hidden h-10 w-10 items-center justify-center self-center transition duration-300 ease-in-out sm:flex ${plusStyle} rounded-full font-semibold uppercase`}
                 onClick={addOne}
             >
                 +
@@ -64,13 +70,13 @@ export default function LineGenerator() {
 
             <div className="order-3 grid grid-cols-2 gap-2 pb-4 sm:hidden">
                 <button
-                    className={`h-12 items-center justify-center self-center sm:flex ${minusStyle} rounded-full font-semibold uppercase`}
+                    className={`h-12 items-center justify-center self-center transition duration-300 ease-in-out sm:flex ${minusStyle} rounded-full font-semibold uppercase`}
                     onClick={minusOne}
                 >
                     −
                 </button>
                 <button
-                    className={`h-12 items-center justify-center self-center sm:flex ${plusStyle} rounded-full font-semibold uppercase`}
+                    className={`h-12 items-center justify-center self-center transition duration-300 ease-in-out sm:flex ${plusStyle} rounded-full font-semibold uppercase`}
                     onClick={addOne}
                 >
                     +
@@ -83,7 +89,7 @@ export default function LineGenerator() {
 
             <button
                 type="button"
-                className={`order-5 rounded-l-full rounded-r-full bg-${currentType.baseColor} px-4 py-3 font-semibold uppercase ${currentType.textColor} hover:bg-${currentType.activeColor} sm:rounded-l-none`}
+                className={`order-5 rounded-l-full rounded-r-full transition duration-300 ease-in-out bg-${schema.baseColor} px-4 py-3 font-semibold uppercase ${schema.textColor} hover:bg-${schema.activeColor} sm:rounded-l-none`}
                 onClick={buttonClick}
             >
                 <span className="flex items-center justify-center">
