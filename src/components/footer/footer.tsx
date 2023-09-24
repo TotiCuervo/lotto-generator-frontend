@@ -1,4 +1,4 @@
-'use client'
+import Link from 'next/link'
 import React from 'react'
 
 export default function Footer() {
@@ -24,32 +24,13 @@ export default function Footer() {
                     </p>
 
                     <div className="-mx-2 mt-3 flex sm:mt-0">
-                        <a
-                            href="#"
+                        <Link
+                            href="/privacy"
                             className="mx-2 text-sm text-gray-500 transition-colors duration-300 hover:text-gray-500 dark:hover:text-gray-300"
-                            aria-label="Reddit"
-                        >
-                            {' '}
-                            Teams{' '}
-                        </a>
-
-                        <a
-                            href="#"
-                            className="mx-2 text-sm text-gray-500 transition-colors duration-300 hover:text-gray-500 dark:hover:text-gray-300"
-                            aria-label="Reddit"
                         >
                             {' '}
                             Privacy{' '}
-                        </a>
-
-                        <a
-                            href="#"
-                            className="mx-2 text-sm text-gray-500 transition-colors duration-300 hover:text-gray-500 dark:hover:text-gray-300"
-                            aria-label="Reddit"
-                        >
-                            {' '}
-                            Cookies{' '}
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>
