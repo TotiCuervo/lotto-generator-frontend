@@ -1,27 +1,26 @@
-import { useCartContext } from '@/context/CartContext'
-import PrimaryButton from '@/components/buttons/primary-button'
-import { useSessionContext } from '@/context/SessionContext'
-import Link from 'next/link'
+import { useCartContext } from "@/context/CartContext";
+import PrimaryButton from "@/components/buttons/primary-button";
+import { useSessionContext } from "@/context/SessionContext";
+import Link from "next/link";
 
 export default function TotalSection() {
-    const { toggleMenu, cartItems } = useCartContext()
-    const { profile } = useSessionContext()
+    const { toggleMenu, cartItems } = useCartContext();
+    const { profile } = useSessionContext();
 
-    const hasSufficientCredits =
-        profile && profile.credits - cartItems.length >= 0
+    const hasSufficientCredits = profile && profile.credits - cartItems.length >= 0;
+
+    const disabled = cartItems.length === 0 && profile !== null;
 
     function getHintText() {
         if (!profile) {
-            return "Login to reserve your numbers. Your reservations will be still be here when you're logged in."
+            return "Login to reserve your numbers. Your reservations will be still be here when you're logged in.";
         }
 
         if (!hasSufficientCredits) {
-            return 'Insufficient credits. Please buy more credits to reserve your numbers.'
+            return "Insufficient credits. Please buy more credits to reserve your numbers.";
         }
 
-        return `After reserving, you will have ${
-            profile.credits - cartItems.length
-        } credits left.`
+        return `After reserving, you will have ${profile.credits - cartItems.length} credits left.`;
     }
 
     return (
@@ -30,13 +29,7 @@ export default function TotalSection() {
                 <p>Cost</p>
                 <p>{cartItems.length} Credits</p>
             </div>
-            <p
-                className={`mt-2 text-sm ${
-                    profile && hasSufficientCredits
-                        ? 'text-gray-500'
-                        : 'text-red-500'
-                }`}
-            >
+            <p className={`mt-2 text-sm ${profile && hasSufficientCredits ? "text-gray-500" : "text-red-500"}`}>
                 {getHintText()}
             </p>
             <div className="mt-6">
@@ -47,32 +40,20 @@ export default function TotalSection() {
                 )}
                 {profile && !hasSufficientCredits && (
                     <Link href="/pricing">
-                        <PrimaryButton className="w-full">
-                            Buy More Credits
-                        </PrimaryButton>
+                        <PrimaryButton className="w-full">Buy More Credits</PrimaryButton>
                     </Link>
                 )}
                 {profile && hasSufficientCredits && (
                     <Link href="/pricing">
-                        <PrimaryButton className="w-full">
+                        <PrimaryButton disabled={disabled} className="w-full">
                             Complete Reservation
                         </PrimaryButton>
                     </Link>
                 )}
             </div>
             <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
-                <p>
-                    or{' '}
-                    <button
-                        type="button"
-                        className="font-medium text-slate-700 hover:text-slate-600"
-                        onClick={() => toggleMenu(false)}
-                    >
-                        Continue Shopping
-                        <span aria-hidden="true"> &rarr;</span>
-                    </button>
-                </p>
+                <p>Reminder: Reservations are not lottery tickets. You must buy the tickets separately.</p>
             </div>
         </div>
-    )
+    );
 }
