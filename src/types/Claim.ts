@@ -1,11 +1,7 @@
-import { IDraw } from './IDraw'
-import { LotteryType } from './LotteryType'
-import { Profile } from './Profile'
+import { Combination } from "./Combination";
+import { Profile } from "./Profile";
+import { Database } from "./schema";
 
-export interface Claim {
-    id: number
-    profile: Profile
-    numbers: IDraw
-    drawing_date: Date
-    lottery: LotteryType
-}
+export type Claim = Database["public"]["Tables"]["claims"]["Row"];
+
+export type ClaimInsert = Database["public"]["Tables"]["claims"]["Insert"];

@@ -2,29 +2,28 @@ import { LotteryType } from "@/types/LotteryType";
 import React from "react";
 import BallRow from "../lottery/ball-row";
 import useLotteryColorSchema from "@/hooks/useLotteryColorSchema";
-import { IDraw } from "@/types";
 import { useCartContext } from "@/context/CartContext";
 import { getNextLotteryDate } from "@/methods/getNextLotteryDate";
 import TicketCheckbox from "../checkboxes/ticket-checkbox";
 import PrimaryButton from "../buttons/primary-button";
+import { Generation } from "@/types/Generation";
 
 interface IProps {
     type: LotteryType;
-    draw: IDraw;
+    generation: Generation;
     index: number;
     checked: boolean;
-    setCheckedDraws: (draw: IDraw) => void;
+    setCheckedGenerations: (generation: Generation) => void;
 }
 
-export default function LineRow({ type, draw, index, checked, setCheckedDraws }: IProps) {
+export default function LineRow({ type, generation, index, checked, setCheckedGenerations }: IProps) {
     const { schema } = useLotteryColorSchema(type);
     const { toggleMenu, addToCart } = useCartContext();
     const nextDrawDate = getNextLotteryDate(type);
 
     function handleReserve() {
         addToCart({
-            numbers: draw,
-            lottery: type,
+            combination: generation.combination,
             drawing_date: nextDrawDate,
         });
         toggleMenu(true);
@@ -33,12 +32,12 @@ export default function LineRow({ type, draw, index, checked, setCheckedDraws }:
     return (
         <div className="flex flex-wrap gap-4">
             <div className="pt-[2.5px]">
-                <TicketCheckbox checked={checked} onClick={() => setCheckedDraws(draw)} />
+                <TicketCheckbox checked={checked} onClick={() => setCheckedGenerations(generation)} />
             </div>
             <div className="grow grid grid-rows-2">
                 <div className="text-left text-xl font-bold">Line {index}</div>
                 <div className="mx-auto sm:m-0">
-                    <BallRow main={draw.slice(0, 5)} special={draw[5]} type={type} />
+                    <BallRow combination={generation.combination} type={type} />
                 </div>
             </div>
             <div className="grow sm:grow-0 grid grid-cols-2 gap-2 sm:content-end">

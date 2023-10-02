@@ -1,3 +1,3 @@
-import { Database } from '@/types/schema'
+import { Database } from "@/types/schema";
 
-export type Profile = Database['public']['Tables']['profiles']['Row']
+export type Profile = Database["public"]["Tables"]["profiles"]["Row"];

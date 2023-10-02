@@ -1,3 +1,8 @@
-import { Claim } from './Claim'
+import { Combination } from "./Combination";
 
-export type CartItem = Omit<Claim, 'id' | 'profile' | 'created_at'>
+export interface CartItem {
+    combination: Combination;
+    drawing_date: Date;
+    error?: boolean;
+    errorMessage?: string;
+}

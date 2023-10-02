@@ -1,55 +1,55 @@
-import { Fragment } from 'react'
-import { Menu, Transition } from '@headlessui/react'
-import Link from 'next/link'
+import { Fragment } from "react";
+import { Menu, Transition } from "@headlessui/react";
+import Link from "next/link";
 
 function classNames(...classes: string[]) {
-    return classes.filter(Boolean).join(' ')
+    return classes.filter(Boolean).join(" ");
 }
 
 export interface MenuItem {
-    name: string
-    type: 'link' | 'button' | 'info'
-    action?: () => void
-    href?: string
+    name: string;
+    type: "link" | "button" | "info";
+    action?: () => void;
+    href?: string;
 }
 
-export type GroupedMenuItems = MenuItem[]
+export type GroupedMenuItems = MenuItem[];
 
 interface IProps {
-    children: React.ReactNode
-    menuItems: GroupedMenuItems[]
+    children: React.ReactNode;
+    menuItems: GroupedMenuItems[];
 }
 
 export default function Dropdown({ children, menuItems }: IProps) {
     function renderMenuItem(item: MenuItem, active: boolean) {
-        if (item.type === 'link') {
+        if (item.type === "link") {
             return (
                 <Link
                     href={item.href!}
                     className={classNames(
-                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-500',
-                        'block px-4 py-2 text-sm font-medium'
+                        active ? "bg-gray-100 text-gray-900" : "text-gray-500",
+                        "block px-4 py-2 text-sm font-medium"
                     )}
                 >
                     {item.name}
                 </Link>
-            )
+            );
         }
 
-        if (item.type === 'info') {
+        if (item.type === "info") {
             return (
                 <div
                     className={classNames(
-                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-500',
-                        'block px-4 py-2 text-sm font-medium'
+                        active ? "bg-gray-100 text-gray-900" : "text-gray-500",
+                        "block px-4 py-2 text-sm font-medium"
                     )}
                 >
                     {item.name}
                 </div>
-            )
+            );
         }
 
-        if (item.type === 'button') {
+        if (item.type === "button") {
             return (
                 <div
                     className="block cursor-pointer px-4 py-2 text-sm font-medium hover:bg-slate-200 focus:bg-slate-200"
@@ -57,7 +57,7 @@ export default function Dropdown({ children, menuItems }: IProps) {
                 >
                     {item.name}
                 </div>
-            )
+            );
         }
     }
 
@@ -79,13 +79,9 @@ export default function Dropdown({ children, menuItems }: IProps) {
                 >
                     <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                         {menuItems.map((group, index) => (
-                            <div className="py-1">
+                            <div className="py-1" key={`dropdown-${index}`}>
                                 {group.map((item) => (
-                                    <Menu.Item>
-                                        {({ active }) => (
-                                            <>{renderMenuItem(item, active)}</>
-                                        )}
-                                    </Menu.Item>
+                                    <Menu.Item>{({ active }) => <>{renderMenuItem(item, active)}</>}</Menu.Item>
                                 ))}
                             </div>
                         ))}
@@ -93,5 +89,5 @@ export default function Dropdown({ children, menuItems }: IProps) {
                 </Transition>
             </Menu>
         </div>
-    )
+    );
 }

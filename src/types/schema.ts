@@ -9,6 +9,113 @@ export type Json =
 export interface Database {
   public: {
     Tables: {
+      claims: {
+        Row: {
+          combination: number
+          created_at: string
+          drawing_date: string
+          id: number
+          profile: string
+        }
+        Insert: {
+          combination: number
+          created_at?: string
+          drawing_date: string
+          id?: number
+          profile: string
+        }
+        Update: {
+          combination?: number
+          created_at?: string
+          drawing_date?: string
+          id?: number
+          profile?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "claims_combination_fkey"
+            columns: ["combination"]
+            referencedRelation: "combinations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "claims_profile_fkey"
+            columns: ["profile"]
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      combinations: {
+        Row: {
+          id: number
+          lottery: string
+          number_1: number
+          number_2: number
+          number_3: number
+          number_4: number
+          number_5: number
+          special_number: number
+        }
+        Insert: {
+          id?: number
+          lottery: string
+          number_1: number
+          number_2: number
+          number_3: number
+          number_4: number
+          number_5: number
+          special_number: number
+        }
+        Update: {
+          id?: number
+          lottery?: string
+          number_1?: number
+          number_2?: number
+          number_3?: number
+          number_4?: number
+          number_5?: number
+          special_number?: number
+        }
+        Relationships: []
+      }
+      generations: {
+        Row: {
+          combination: number
+          created_at: string | null
+          drawing_date: string
+          id: number
+          profile: string | null
+        }
+        Insert: {
+          combination: number
+          created_at?: string | null
+          drawing_date: string
+          id?: number
+          profile?: string | null
+        }
+        Update: {
+          combination?: number
+          created_at?: string | null
+          drawing_date?: string
+          id?: number
+          profile?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "generations_combination_fkey"
+            columns: ["combination"]
+            referencedRelation: "combinations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "generations_profile_fkey"
+            columns: ["profile"]
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
       profiles: {
         Row: {
           avatar_url: string | null

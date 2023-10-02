@@ -2,11 +2,10 @@ import { LotteryType } from "@/types/LotteryType";
 import React, { useEffect, useState } from "react";
 import { useDrawContext } from "@/context/DrawContext";
 import LineRow from "./rows/line-row";
-import { IDraw } from "@/types";
 import PrimaryButton from "./buttons/primary-button";
 import { useCartContext } from "@/context/CartContext";
 import { getNextLotteryDate } from "@/methods/getNextLotteryDate";
-import { CartItem } from "@/types/CartItem";
+import { Generation } from "@/types/Generation";
 
 interface IProps {
     type: LotteryType;
@@ -16,35 +15,35 @@ export default function DrawResults({ type }: IProps) {
     const { draws } = useDrawContext();
     const { addMultipleToCart, toggleMenu } = useCartContext();
 
-    const [checkedDraws, setCheckedDraws] = useState<IDraw[]>([]);
+    const [checkedGenerations, setCheckedGenerations] = useState<Generation[]>([]);
 
-    const disabled = checkedDraws.length === 0;
+    const disabled = checkedGenerations.length === 0;
 
     useEffect(() => {
-        setCheckedDraws(draws);
+        setCheckedGenerations(draws);
     }, [draws]);
 
     if (draws.length === 0) {
         return null;
     }
 
-    function handleSetChecked(draw: IDraw) {
-        if (checkedDraws.includes(draw)) {
-            setCheckedDraws(checkedDraws.filter((checked) => checked !== draw));
+    function handleSetChecked(draw: Generation) {
+        if (checkedGenerations.includes(draw)) {
+            setCheckedGenerations(checkedGenerations.filter((checked) => checked !== draw));
         } else {
-            setCheckedDraws([...checkedDraws, draw]);
+            setCheckedGenerations([...checkedGenerations, draw]);
         }
     }
 
     function handleReserveSelected() {
-        if (checkedDraws.length === 0) {
+        if (checkedGenerations.length === 0) {
             return;
         }
 
         const nextDrawDate = getNextLotteryDate(type);
 
-        const cartItems = checkedDraws.map((draw) => ({
-            numbers: draw,
+        const cartItems = checkedGenerations.map((draw) => ({
+            ...draw,
             lottery: type,
             drawing_date: nextDrawDate,
         }));
@@ -59,11 +58,11 @@ export default function DrawResults({ type }: IProps) {
                 {draws.map((draw, index) => (
                     <LineRow
                         key={`draw-${index}`}
-                        type={type}
-                        draw={draw}
+                        type={draw.combination.lottery}
+                        generation={draw}
                         index={index + 1}
-                        checked={checkedDraws.includes(draw)}
-                        setCheckedDraws={handleSetChecked}
+                        checked={checkedGenerations.includes(draw)}
+                        setCheckedGenerations={handleSetChecked}
                     />
                 ))}
             </div>
@@ -103,7 +102,7 @@ export default function DrawResults({ type }: IProps) {
                             d="M16.5 6v.75m0 3v.75m0 3v.75m0 3V18m-9-5.25h5.25M7.5 15h3M3.375 5.25c-.621 0-1.125.504-1.125 1.125v3.026a2.999 2.999 0 010 5.198v3.026c0 .621.504 1.125 1.125 1.125h17.25c.621 0 1.125-.504 1.125-1.125v-3.026a2.999 2.999 0 010-5.198V6.375c0-.621-.504-1.125-1.125-1.125H3.375z"
                         />
                     </svg>
-                    ({checkedDraws.length})
+                    ({checkedGenerations.length})
                 </PrimaryButton>
             </div>
         </div>
